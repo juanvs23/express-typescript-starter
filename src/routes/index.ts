@@ -3,6 +3,7 @@ import { check } from "express-validator";
 import multer from "multer";
 import { validateFields } from "../middleware";
 import { responseSuccess } from "../helpers/responses";
+import { fetchApi } from "../controller/fetch-api";
 
 const router = Router();
 const upload = multer();
@@ -11,12 +12,10 @@ router.post(
   "/sendemail",
   [
     upload.any(),
-    check("email", "Please use a valid email address.").isEmail(),
-    validateFields,
+    // check("email", "Please use a valid email address.").isEmail(),
+    // validateFields,
   ],
-  (req: Request, res: Response) => {
-    return responseSuccess(res, 200, "Form sent and saved successfully");
-  }
+  fetchApi
 );
 router.get("/", (req: Request, res: Response) => {
   res.render(
