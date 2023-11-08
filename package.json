@@ -1,7 +1,7 @@
 {
-  "name": "prci-list-back",
+  "name": "express-ts-fetch-api",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
     "dev": "concurrently \"npx tsc --watch & tscp -w \" \"nodemon dist/index.js\"",
