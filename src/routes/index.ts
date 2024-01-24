@@ -4,6 +4,7 @@ import multer from "multer";
 import { validateFields } from "../middleware";
 import { responseSuccess } from "../helpers/responses";
 import { fetchApi } from "../controller/fetch-api";
+import { getNeighborhood } from "../controller/get-neighborhood";
 
 const router = Router();
 const upload = multer();
@@ -17,6 +18,7 @@ router.post(
   ],
   fetchApi
 );
+router.get("/neighborhoods", [upload.any()], getNeighborhood);
 router.get("/", (req: Request, res: Response) => {
   res.render(
     "index",

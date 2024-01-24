@@ -2,12 +2,12 @@ import { Response, Request, NextFunction } from "express";
 import { responseSuccess } from "../helpers/responses";
 import fetch from "node-fetch";
 
-export const fetchApi = async (
+export const getNeighborhood = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const url = process.env.VITE_URL_DEV_SIDDONS_NEIGHBORHOOD_LIST || "";
+  const url = process.env.VITE_DEV_URL_NEIGHBORHOODS || "";
   // console.log(req.headers.authorization);
   const response = await fetch(url, {
     body: JSON.stringify(req.body),
