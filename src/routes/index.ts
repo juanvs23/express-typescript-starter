@@ -14,8 +14,26 @@ router.post(
     check("email", "Please use a valid email address.").isEmail(),
     validateFields,
   ],
-  (req: Request, res: Response) => {
-    return responseSuccess(res, 200, "Form sent and saved successfully");
+  async (req: Request, res: Response) => {
+    const { name, email, phone, ib_tags, action, message } = req.body;
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("ib_tags", ib_tags);
+    formData.append("action", action);
+    formData.append("message", JSON.stringify(message));
+    const response = await fetch(
+      "https://newsluxlifedev.wpengine.com/wp-admin/admin-ajax.php",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+
+    return res.status(200).json(data);
   }
 );
 router.get("/", (req: Request, res: Response) => {
