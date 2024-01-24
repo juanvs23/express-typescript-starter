@@ -3,6 +3,8 @@ import { check } from "express-validator";
 import multer from "multer";
 import { validateFields } from "../middleware";
 import { responseSuccess } from "../helpers/responses";
+import { fetchApi } from "../controller/fetch-api";
+import { getNeighborhood } from "../controller/get-neighborhood";
 
 const router = Router();
 const upload = multer();
@@ -11,9 +13,10 @@ router.post(
   "/sendemail",
   [
     upload.any(),
-    check("email", "Please use a valid email address.").isEmail(),
-    validateFields,
+    // check("email", "Please use a valid email address.").isEmail(),
+    // validateFields,
   ],
+<<<<<<< HEAD
   async (req: Request, res: Response) => {
     const { name, email, phone, ib_tags, action, message } = req.body;
     const formData = new FormData();
@@ -35,7 +38,11 @@ router.post(
 
     return res.status(200).json(data);
   }
+=======
+  fetchApi
+>>>>>>> ae14414d48c0c497729e12f2874bfeae3e2a611e
 );
+router.get("/neighborhoods", [upload.any()], getNeighborhood);
 router.get("/", (req: Request, res: Response) => {
   res.render(
     "index",
